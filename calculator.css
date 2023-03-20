@@ -33,7 +33,7 @@ button
     min-height: 20px;
     min-width: 72px;
     margin-bottom: 2px;
-   
+    cursor:pointer;
 }
 #calculatorBody
 {   
@@ -52,7 +52,7 @@ button
     
     font-family: 'Orbitron', sans-serif;
     padding: 16px;
-    font-size:40px;
+    font-size:20px;
      width: 260px;
      margin-left: 4px;
      margin-bottom: 10px;
@@ -71,7 +71,4 @@ button
 #delete{
     width: 148px;
     text-align: center;
-}
-#equals{
-    width: 148px;
 }
