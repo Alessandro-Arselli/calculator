@@ -58,7 +58,7 @@ function operate(operator,num1,num2)
     return result;
 
 }
-if(screenContent.innerText == '') screenContent.innerText = "0";
+
 
 numbers.forEach(number =>{
     
@@ -68,7 +68,9 @@ numbers.forEach(number =>{
        
         console.log(operatorCalled);
         if(screenContent.innerText === '0') screenContent.innerText = '';
+        
         if(operatorCalled === false){
+            //REMINDER add something to check if the number starts with a decimal point and add a 0 in front
             firstNumber = firstNumber + click.target.innerText;
             screenContent.innerText = screenContent.innerText + click.target.innerText;
 
@@ -76,6 +78,7 @@ numbers.forEach(number =>{
         }
       
         if(operatorCalled === true){
+            //REMINDER, add something to check if the number starts with a decimal point and add a 0 in front
             secondNumber = secondNumber + click.target.innerText;
             screenContent.innerText = screenContent.innerText + click.target.innerText;
     
@@ -105,7 +108,7 @@ equals.addEventListener('click',() =>{
 
 
     if(operatorCalled === true){
-         let result =  operate(currentOperator,parseInt(firstNumber),parseInt(secondNumber))
+         let result =  operate(currentOperator,parseFloat(firstNumber),parseFloat(secondNumber))
         
         screenContent.innerText = result;
         firstNumber = result;
@@ -118,8 +121,10 @@ equals.addEventListener('click',() =>{
   
 
 });
-    
+
+//Clear the screen and reset all values to default
 clear.addEventListener('click',(click) =>{
+    
     screenContent.innerText ='0';
     firstNumber = '';
     secondNumber = '';
@@ -129,11 +134,34 @@ clear.addEventListener('click',(click) =>{
 });
 
 del.addEventListener('click',(click) =>{
+    
+    
+     if(operatorCalled === false){
+        firstNumber = screenContent.innerText = screenContent.innerText.slice(0,-1);
+        console.log('1');
 
-    screenContent.innerText = screenContent.innerText.slice(0,-1);
+     } 
+     //checks to see if the last input was an operator.
+     else if(operatorCalled === true &&  screenContent.innerText.slice(-1) == '+' || screenContent.innerText.slice(-1) == '-' ||
+             screenContent.innerText.slice(-1) == '*' ||screenContent.innerText.slice(-1) == '/')
+             {
+
+                screenContent.innerText = screenContent.innerText.slice(0,-1);
+                operatorCalled = false;
+                console.log('2')
+             }
+     else
+     {
+        console.log(screenContent.innerText.slice(0,-1));
+        screenContent.innerText = screenContent.innerText.slice(0,-1);
+        secondNumber = secondNumber.slice(0,-1);
+        console.log('3')
+     }
+     
     console.log(click.target.innerText);
     let test = screenContent.innerText;
      console.log(typeof(test));
+     if(screenContent.innerText == '') screenContent.innerText = "0";
     
 });
 
